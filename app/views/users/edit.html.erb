@@ -1,0 +1,41 @@
+<div class="edit-user-container">
+ <div class="container">
+  <div class="row">
+   <div class="col-xs-5">
+    <h2>User info</h2>
+     <%= form_for(@user) do |f| %>
+
+      <% if @user.errors %>
+     <ul>
+      <% @user.errors.full_messages.each do |message| %>
+      <li><%= pluralize(@user.errors.count,"error") %> prohibited user from being saved:</li>
+      <li><%= message %></li>
+      <% end %>
+     </ul>
+    <% end %>
+   <div class="col-xs-4">
+    <div class="field">
+     <strong>Name</strong>
+     <%= f.text_field :name %>
+    </div>
+
+    <div class="field">
+     <%= attachment_image_tag @user, :profile_image, size: "40x40", class: "img-circle pull-left profile-thumb", fallback: "no_image.jpg"%>
+     <%= f.attachment_field :profile_image, placeholder: "プロフィール画像", class: "user-edit-form" %>
+    </div>
+
+    <div class="field">
+     <strong>Introduction</strong>
+     <%= f.text_area :introduction %>
+    </div>
+    
+    <div class="actions">
+     <%= f.submit "Update User" %>
+    </div>
+
+    <% end %>
+   </div>
+   </div>
+  </div>
+ </div>
+</div>

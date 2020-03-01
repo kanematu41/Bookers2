@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookers</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+   <div class="header">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+       <div class="navbar-header">
+        <p class="text-style">Bookers</p>
+       </div>
+
+       <div id="slidemenu">
+        <ul class="nav navbar-nav navbar-right">
+
+
+          <% if user_signed_in? %> <!-- ユーザーがログインしているか調べる -->
+
+            <li><%= link_to user_path(current_user.id) do %><span class="glyphicon glyphicon-home" aria-hidden="true">
+            </span> Home<% end %></li>
+            
+            <li><%= link_to users_path do %><span class="glyphicon glyphicon-user" aria-hidden="true">
+            </span> Users<% end %></li>
+            
+            <li><%= link_to books_path do %><span class="glyphicon glyphicon-book" aria-hidden="true">
+            </span> Books<% end %></li>
+            
+            <li><%= link_to destroy_user_session_path, method: :delete do %><span class="glyphicon glyphicon-log-in" aria-hidden="true">
+            </span> logout<% end %></li>
+
+          <% else %>
+  <!-- ユーザーがログインしていなかった時の処理 -->
+            <li><%= link_to root_path do %><span class="glyphicon glyphicon-home" aria-hidden="true">
+            </span> Home<% end %></li>
+
+            <li><%= link_to home_about_path do %><span class="glyphicon glyphicon-link" aria-hidden="true">
+            </span>About<% end %></li>
+
+            <li><%= link_to new_user_registration_path do %><span class="glyphicon glyphicon-edit" aria-hidden="true">
+            </span> sign up<% end %></li>
+
+            <li><%= link_to new_user_session_path do %><span class="glyphicon glyphicon-log-in" aria-hidden="true">
+            </span> login<% end %></li>
+
+          <% end %>
+        </ul>
+      </div>
+      </div>
+    </nav>
+   </div>
+    <%= yield %>
+
+   <footer class="footer">
+      <div class="container">
+        <div class="row">
+        <div class="col-md-3 col-md-offset-9">
+          <p class="footer-text">CopyRight Infratop.inc</p>
+        </div>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+</html>
+
